@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ajusta a tela pro tamanho do celular (feito por IA, verificado) --> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Kids</title>
+    
+    <!-- Puxa a fonte estilo Minecraft do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Puxa o nosso arquivo de design que ta no styleCSS-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Tudo fica dentro dessa caixa principal pra não espalhar na tela -->
+    <main class="container">
+        <header>
+            <h1>Finance Kids</h1>
+            <p>Construa seu futuro bloco por bloco!</p> <!-- agente pode mudar essa legenda -->
+        </header>
+
+        <!-- Caixa de perfil. O JS usa o 'id' pra achar ela e esconder depois -->
+        <section id="escolha-perfil" class="card">
+            <h2>Quem é você?</h2>
+            <!-- O onclick avisa o JS pra rodar a função quando o botão for clicado -->
+            <button class="btn-bloco grama" onclick="mostrarIdades()">Sou Aluno</button>
+            <button class="btn-bloco pedra" onclick="entrarComoProfessor()">Sou Professor</button>
+        </section>
+
+        <!-- Essa caixa começa escondida (a classe 'oculto' faz isso no CSS) -->
+        <section id="escolha-idade" class="card oculto">
+            <h2>Qual a sua idade?</h2>
+            <!-- A gente passa a idade entre parênteses pro JS saber qual botão foi clicado -->
+            <button class="btn-bloco terra" onclick="entrarComoAluno('6-8')">6 a 8 anos</button>
+            <button class="btn-bloco terra" onclick="entrarComoAluno('9-11')">9 a 11 anos</button>
+            <button class="btn-bloco terra" onclick="entrarComoAluno('12-14')">12 a 14 anos</button>
+            
+            <button class="btn-link" onclick="voltarPerfil()">⬅ Voltar</button>
+        </section>
+    </main>
+    
+    <!-- Chama o script aqui no final pra página carregar mais rápido (sugestão da IA, para rodar melhor a página-->
+    <script src="script.js"></script>
+</body>
+</html>

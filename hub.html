@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Kids - Mapa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- O 'onload' avisa pro JS rodar a função de carregar os dados assim que a tela abrir -->
+<body onload="carregarHub()">
+    <main class="container">
+        <!-- Header escuro com as moedas. Fica sempre visível no topo. Feito por IA -->
+        <header class="painel-status">
+            <h2 id="hub-idade">Idade: --</h2>
+            <div class="saldo-box">
+                <span>Moedas:</span>
+                <span id="hub-saldo" class="valor-moeda">0</span>
+            </div>
+        </header>
+
+        <section class="card mapa-missoes">
+            <h2>Suas Missões</h2>
+            
+            <!-- Missão 1: O JS vai trocar esses textos dependendo da idade do aluno como falamos em sala-->
+            <div class="missao-item ativa">
+                <h3 id="titulo-missao-1">Carregando...</h3>
+                <p id="desc-missao-1">Aguarde...</p>
+                <button class="btn-bloco grama" onclick="irParaMissao(1)">Jogar Missão 1</button>
+            </div>
+
+            <!-- Missão 2: Bloqueada no MVP. O atributo 'disabled' (desabilitado) não deixa clicar. Vai ficar assim por enquanto -->
+            <div class="missao-item bloqueada">
+                <h3>Missão 2: Em Breve</h3>
+                <p>Complete a Missão 1 para liberar.</p>
+                <button class="btn-bloco pedra" disabled>Bloqueado</button>
+            </div>
+        </section>
+        
+        <button class="btn-link" onclick="sair()">Sair do Jogo</button>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
