@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Kids - Missão 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="carregarMissao1()">
+    <main class="container">
+        <header class="painel-status">
+            <h2 id="missao-idade">Faixa: --</h2>
+            <div class="saldo-box">
+                <span>Moedas:</span>
+                <span id="missao-saldo" class="valor-moeda">0</span>
+            </div>
+        </header>
+
+        <section class="card">
+            <div class="badge-modulo">Fase 1: Conhecendo o Dinheiro</div>
+
+            <div class="tema-banner">
+                <span id="m1-icone" class="tema-icone">🪙</span>
+                <h2 id="m1-titulo">Carregando missão...</h2>
+            </div>
+
+            <p id="m1-cenario" class="texto-cenario">Aguarde...</p>
+
+            <div id="m1-opcoes">
+                <button id="btn-opcao-0" class="btn-bloco terra" onclick="responderMissao1(0)">Opção 1</button>
+                <button id="btn-opcao-1" class="btn-bloco terra" onclick="responderMissao1(1)">Opção 2</button>
+            </div>
+
+            <div id="m1-feedback" class="feedback-box oculto">
+                <p id="m1-resultado-moedas" class="destaque-moedas"></p>
+                <p id="m1-texto-feedback"></p>
+                <button class="btn-bloco grama" onclick="voltarParaHub()">Voltar ao Mapa</button>
+            </div>
+        </section>
+
+        <button class="btn-link" onclick="voltarParaHub()">⬅ Voltar ao Mapa</button>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
