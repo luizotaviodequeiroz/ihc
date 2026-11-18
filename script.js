@@ -1,44 +1,5 @@
-/* === ARMAZENAMENTO SEGURO (FUNCIONA NO NAVEGADOR E EM COMPILADORES ONLINE) === */
-const memoriaTemporaria = {};
+/* === TELA INICIAL (LOGIN E PERFIL) === */
 
-function salvarDado(chave, valor) {
-    memoriaTemporaria[chave] = String(valor);
-    try {
-        localStorage.setItem(chave, String(valor));
-    } catch (erro) {
-        // Se o compilador online bloquear o localStorage, usa a memória temporária
-    }
-}
-
-function lerDado(chave) {
-    try {
-        const valorSalvo = localStorage.getItem(chave);
-        if (valorSalvo !== null) return valorSalvo;
-    } catch (erro) {
-        // Ignora bloqueio do compilador online
-    }
-    return memoriaTemporaria[chave] || null;
-}
-
-function limparDados() {
-    for (let chave in memoriaTemporaria) {
-        delete memoriaTemporaria[chave];
-    }
-    try {
-        localStorage.clear();
-    } catch (erro) {}
-}
-
-/* === CONTROLE DE TELAS (SUBSTITUI A TROCA DE PÁGINAS NO COMPILADOR) === */
-function mostrarTela(idTela) {
-    document.getElementById('tela-login').classList.add('oculto');
-    document.getElementById('tela-hub').classList.add('oculto');
-    document.getElementById('tela-missao-1').classList.add('oculto');
-
-    document.getElementById(idTela).classList.remove('oculto');
-}
-
-/* === TELA INICIAL (PERFIL E IDADE) === */
 function mostrarIdades() {
     document.getElementById('escolha-perfil').classList.add('oculto');
     document.getElementById('escolha-idade').classList.remove('oculto');
@@ -50,27 +11,26 @@ function voltarPerfil() {
 }
 
 function entrarComoAluno(idadeEscolhida) {
-    salvarDado('usuarioTipo', 'aluno');
-    salvarDado('alunoIdade', idadeEscolhida);
-    salvarDado('alunoSaldo', 50);
-    salvarDado('missao1Concluida', 'false');
-
-    carregarHub();
-    mostrarTela('tela-hub');
+    localStorage.setItem('usuarioTipo', 'aluno');
+    localStorage.setItem('alunoIdade', idadeEscolhida);
+    localStorage.setItem('alunoSaldo', 50);
+    localStorage.removeItem('missao1Concluida');
+    window.location.href = 'hub.html';
 }
 
 function entrarComoProfessor() {
     alert("Área do Professor: ficará para a próxima etapa do projeto!");
 }
 
-/* === TELA DO HUB (MAPA DE MISSÕES) === */
+/* === FUNÇÕES DO HUB (MAPA) === */
+
 function carregarHub() {
-    let idade = lerDado('alunoIdade');
-    let saldo = lerDado('alunoSaldo');
-    let missao1Concluida = lerDado('missao1Concluida') === 'true';
+    let idade = localStorage.getItem('alunoIdade');
+    let saldo = localStorage.getItem('alunoSaldo');
+    let missao1Concluida = localStorage.getItem('missao1Concluida') === 'true';
 
     if (!idade) {
-        mostrarTela('tela-login');
+        window.location.href = 'index.html';
         return;
     }
 
@@ -81,7 +41,6 @@ function carregarHub() {
     let descM1 = document.getElementById('desc-missao-1');
     let btnM1 = document.getElementById('btn-missao-1');
 
-    // Adapta o texto da Missão 1 conforme a faixa etária
     if (idade === '6-8') {
         tituloM1.innerText = "A Loja de Doces";
         descM1.innerText = "Você quer comprar um doce ou guardar a moeda?";
@@ -95,15 +54,14 @@ function carregarHub() {
         descM1.innerText = "Defina a estratégia de preços para vender no atacado ou varejo.";
     }
 
-    // Controla o desbloqueio da Missão 2 após concluir a Missão 1
-    let cardM2 = document.getElementById('card-missao-2');
-    let tituloM2 = document.getElementById('titulo-missao-2');
-    let descM2 = document.getElementById('desc-missao-2');
-    let btnM2 = document.getElementById('btn-missao-2');
-
     if (missao1Concluida) {
         tituloM1.innerText += " ✔";
         btnM1.innerText = "Jogar Novamente";
+
+        let cardM2 = document.getElementById('card-missao-2');
+        let tituloM2 = document.getElementById('titulo-missao-2');
+        let descM2 = document.getElementById('desc-missao-2');
+        let btnM2 = document.getElementById('btn-missao-2');
 
         cardM2.classList.remove('bloqueada');
         tituloM2.innerText = "Missão 2: Planejando Gastos";
@@ -112,42 +70,25 @@ function carregarHub() {
         btnM2.classList.remove('pedra');
         btnM2.classList.add('grama');
         btnM2.innerText = "Acessar Missão 2";
-    } else {
-        btnM1.innerText = "Jogar Missão 1";
-
-        cardM2.classList.add('bloqueada');
-        tituloM2.innerText = "Missão 2: Em Breve";
-        descM2.innerText = "Complete a Missão 1 para liberar.";
-        btnM2.disabled = true;
-        btnM2.classList.remove('grama');
-        btnM2.classList.add('pedra');
-        btnM2.innerText = "Bloqueado";
     }
 }
 
 function irParaMissao(numeroMissao) {
-    salvarDado('missaoAtual', numeroMissao);
-
+    localStorage.setItem('missaoAtual', numeroMissao);
     if (numeroMissao === 1) {
-        carregarMissao1();
-        mostrarTela('tela-missao-1');
+        window.location.href = 'missao-1.html';
     } else if (numeroMissao === 2) {
         alert("Conteúdo do próximo módulo! (Disponível na próxima etapa do projeto)");
     }
 }
 
-function voltarParaHub() {
-    carregarHub();
-    mostrarTela('tela-hub');
-}
-
 function sair() {
-    limparDados();
-    voltarPerfil();
-    mostrarTela('tela-login');
+    localStorage.clear();
+    window.location.href = 'index.html';
 }
 
-/* === MISSÃO 1: CONHECENDO O DINHEIRO (DILEMA ÚNICO POR FAIXA) === */
+/* === DADOS E LÓGICA DA MISSÃO 1 (CONHECENDO O DINHEIRO) === */
+
 const DADOS_MISSAO_1 = {
     '6-8': {
         icone: "🍬",
@@ -203,17 +144,13 @@ const DADOS_MISSAO_1 = {
 };
 
 function carregarMissao1() {
-    let idade = lerDado('alunoIdade');
-    let saldo = lerDado('alunoSaldo');
+    let idade = localStorage.getItem('alunoIdade');
+    let saldo = localStorage.getItem('alunoSaldo');
 
     if (!idade || !DADOS_MISSAO_1[idade]) {
-        mostrarTela('tela-login');
+        window.location.href = 'index.html';
         return;
     }
-
-    // Reseta os botões e esconde o feedback anterior caso jogue novamente
-    document.getElementById('m1-opcoes').classList.remove('oculto');
-    document.getElementById('m1-feedback').classList.add('oculto');
 
     document.getElementById('missao-idade').innerText = "Faixa: " + idade + " anos";
     document.getElementById('missao-saldo').innerText = saldo;
@@ -227,14 +164,13 @@ function carregarMissao1() {
 }
 
 function responderMissao1(indiceOpcao) {
-    let idade = lerDado('alunoIdade');
-    let saldoAtual = parseInt(lerDado('alunoSaldo')) || 50;
+    let idade = localStorage.getItem('alunoIdade');
+    let saldoAtual = parseInt(localStorage.getItem('alunoSaldo')) || 50;
     let opcaoEscolhida = DADOS_MISSAO_1[idade].opcoes[indiceOpcao];
 
-    // Ganha 5 moedas se acertar ou perde 5 se errar
     let novoSaldo = opcaoEscolhida.correta ? saldoAtual + 5 : Math.max(0, saldoAtual - 5);
-    salvarDado('alunoSaldo', novoSaldo);
-    salvarDado('missao1Concluida', 'true');
+    localStorage.setItem('alunoSaldo', novoSaldo);
+    localStorage.setItem('missao1Concluida', 'true');
 
     document.getElementById('missao-saldo').innerText = novoSaldo;
     document.getElementById('m1-opcoes').classList.add('oculto');
@@ -253,4 +189,8 @@ function responderMissao1(indiceOpcao) {
     }
 
     textoFeedback.innerText = opcaoEscolhida.feedback;
+}
+
+function voltarParaHub() {
+    window.location.href = 'hub.html';
 }
