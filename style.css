@@ -1,14 +1,12 @@
 /* ========================================== */
-/* Todo o estilo foi feito por IA, pedi para fazer, pois não sei o stilo que o jogo usa */
+/* Zera margens do navegador                  */
 /* ========================================== */
-/* Zera margens do navegador  */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilo geral: fonte pixelada e fundo azul de céu */
 body {
     font-family: 'Press Start 2P', cursive; 
     background-color: #5C94FC; 
@@ -16,10 +14,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* Limita a largura da tela pra ficar com cara de app de celular no PC (max 400px) */
 .container {
     text-align: center;
     width: 100%;
@@ -41,7 +38,6 @@ header p {
     line-height: 1.5;
 }
 
-/* Cor de fundo cinza, tipo a janela de inventário do Minecraft */
 .card {
     background-color: #C6C6C6; 
     padding: 30px 20px;
@@ -54,8 +50,7 @@ header p {
     color: #333;
 }
 
-/* --- ESTILO BASE DOS BOTÕES --- */
-/* Eles são grandes (padding 15px) pra facilitar o clique de crianças no celular */
+/* --- BOTÕES --- */
 .btn-bloco {
     width: 100%;
     padding: 15px;
@@ -68,12 +63,10 @@ header p {
     transition: transform 0.1s; 
 }
 
-/* Efeito de clique: o botão dá uma afundadinha rápida */
 .btn-bloco:active {
     transform: scale(0.95);
 }
 
-/* --- VARIAÇÕES DOS BOTÕES (O 3D é feito com box-shadow interno) --- */
 .grama {
     background-color: #4CAF50;
     box-shadow: inset 4px 4px 0px 0px #81C784, inset -4px -4px 0px 0px #2E7D32;
@@ -89,7 +82,6 @@ header p {
     box-shadow: inset 4px 4px 0px 0px #A0522D, inset -4px -4px 0px 0px #5C4033;
 }
 
-/* Botão simples (voltar/sair), sem o formato de blocão */
 .btn-link {
     background-color: transparent;
     border: none;
@@ -104,7 +96,6 @@ header p {
     color: #000;
 }
 
-/* Classe mágica que a gente usa no JS pra esconder ou mostrar as caixas */
 .oculto {
     display: none;
 }
@@ -112,8 +103,6 @@ header p {
 /* ==========================================
    ESTILOS DO HUB (MAPA)
 ========================================== */
-
-/* Painel escuro no topo com a idade e as moedas */
 .painel-status {
     background-color: #333;
     border: 4px solid #000;
@@ -131,7 +120,6 @@ header p {
     margin: 0;
 }
 
-/* Caixa amarela de moedas (imita ouro) */
 .saldo-box {
     background-color: #FFD700;
     border: 4px solid #B8860B;
@@ -141,7 +129,6 @@ header p {
     font-weight: bold;
 }
 
-/* Quadrado de cada missão na lista */
 .missao-item {
     background-color: #E0E0E0;
     border: 4px solid #9E9E9E;
@@ -163,7 +150,6 @@ header p {
     color: #444;
 }
 
-/* O botão e o card da missão bloqueada ficam transparentes e cinzas */
 .bloqueada {
     opacity: 0.6;
     background-color: #BDBDBD;
@@ -171,4 +157,73 @@ header p {
 
 .bloqueada h3, .bloqueada p {
     color: #666;
+}
+
+/* ==========================================
+   ESTILOS DA MISSÃO 1
+========================================== */
+.badge-modulo {
+    background-color: #333;
+    color: #FFD700;
+    border: 3px solid #000;
+    font-size: 0.55rem;
+    padding: 8px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+.tema-banner {
+    background-color: #E0E0E0;
+    border: 4px solid #9E9E9E;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.tema-icone {
+    display: block;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.tema-banner h2 {
+    margin-bottom: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.texto-cenario {
+    font-size: 0.65rem;
+    line-height: 1.6;
+    color: #222;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.feedback-box {
+    border: 4px solid #000;
+    padding: 15px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.feedback-box.sucesso {
+    background-color: #C8E6C9;
+}
+
+.feedback-box.alerta {
+    background-color: #FFCDD2;
+}
+
+.destaque-moedas {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #000;
+}
+
+.feedback-box p {
+    font-size: 0.6rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #222;
 }
