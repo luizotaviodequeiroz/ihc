@@ -3,42 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Kids - Mapa</title>
+    <title>Finance Kids</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 </head>
-<!-- O 'onload' avisa pro JS rodar a função de carregar os dados assim que a tela abrir -->
-<body onload="carregarHub()">
+<body>
     <main class="container">
-        <!-- Header escuro com as moedas. Fica sempre visível no topo. Feito por IA -->
-        <header class="painel-status">
-            <h2 id="hub-idade">Idade: --</h2>
-            <div class="saldo-box">
-                <span>Moedas:</span>
-                <span id="hub-saldo" class="valor-moeda">0</span>
-            </div>
-        </header>
 
-        <section class="card mapa-missoes">
-            <h2>Suas Missões</h2>
-            
-            <!-- Missão 1: O JS vai trocar esses textos dependendo da idade do aluno como falamos em sala-->
-            <div class="missao-item ativa">
-                <h3 id="titulo-missao-1">Carregando...</h3>
-                <p id="desc-missao-1">Aguarde...</p>
-                <button class="btn-bloco grama" onclick="irParaMissao(1)">Jogar Missão 1</button>
-            </div>
+        <!-- TELA 1: LOGIN E ESCOLHA DE IDADE -->
+        <div id="tela-login">
+            <header>
+                <h1>Finance Kids</h1>
+                <p>Construa seu futuro bloco por bloco!</p>
+            </header>
 
-            <!-- Missão 2: Bloqueada no MVP. O atributo 'disabled' (desabilitado) não deixa clicar. Vai ficar assim por enquanto -->
-            <div class="missao-item bloqueada">
-                <h3>Missão 2: Em Breve</h3>
-                <p>Complete a Missão 1 para liberar.</p>
-                <button class="btn-bloco pedra" disabled>Bloqueado</button>
-            </div>
-        </section>
-        
-        <button class="btn-link" onclick="sair()">Sair do Jogo</button>
+            <section id="escolha-perfil" class="card">
+                <h2>Quem é você?</h2>
+                <button class="btn-bloco grama" onclick="mostrarIdades()">Sou Aluno</button>
+                <button class="btn-bloco pedra" onclick="entrarComoProfessor()">Sou Professor</button>
+            </section>
+
+            <section id="escolha-idade" class="card oculto">
+                <h2>Qual a sua idade?</h2>
+                <button class="btn-bloco terra" onclick="entrarComoAluno('6-8')">6 a 8 anos</button>
+                <button class="btn-bloco terra" onclick="entrarComoAluno('9-11')">9 a 11 anos</button>
+                <button class="btn-bloco terra" onclick="entrarComoAluno('12-14')">12 a 14 anos</button>
+                <button class="btn-link" onclick="voltarPerfil()">⬅ Voltar</button>
+            </section>
+        </div>
+
+        <!-- TELA 2: HUB (MAPA DE MISSÕES) -->
+        <div id="tela-hub" class="oculto">
+            <header class="painel-status">
+                <h2 id="hub-idade">Faixa: --</h2>
+                <div class="saldo-box">
+                    <span>Moedas:</span>
+                    <span id="hub-saldo" class="valor-moeda">0</span>
+                </div>
+            </header>
+
+            <section class="card mapa-missoes">
+                <h2>Suas Missões</h2>
+
+                <div id="card-missao-1" class="missao-item ativa">
+                    <h3 id="titulo-missao-1">Carregando...</h3>
+                    <p id="desc-missao-1">Aguarde...</p>
+                    <button id="btn-missao-1" class="btn-bloco grama" onclick="irParaMissao(1)">Jogar Missão 1</button>
+                </div>
+
+                <div id="card-missao-2" class="missao-item bloqueada">
+                    <h3 id="titulo-missao-2">Missão 2: Em Breve</h3>
+                    <p id="desc-missao-2">Complete a Missão 1 para liberar.</p>
+                    <button id="btn-missao-2" class="btn-bloco pedra" onclick="irParaMissao(2)" disabled>Bloqueado</button>
+                </div>
+            </section>
+
+            <button class="btn-link" onclick="sair()">Sair do Jogo</button>
+        </div>
+
+        <!-- TELA 3: MISSÃO 1 (CONHECENDO O DINHEIRO) -->
+        <div id="tela-missao-1" class="oculto">
+            <header class="painel-status">
+                <h2 id="missao-idade">Faixa: --</h2>
+                <div class="saldo-box">
+                    <span>Moedas:</span>
+                    <span id="missao-saldo" class="valor-moeda">0</span>
+                </div>
+            </header>
+
+            <section class="card">
+                <div class="badge-modulo">Fase 1: Conhecendo o Dinheiro</div>
+
+                <div class="tema-banner">
+                    <span id="m1-icone" class="tema-icone">🪙</span>
+                    <h2 id="m1-titulo">Carregando missão...</h2>
+                </div>
+
+                <p id="m1-cenario" class="texto-cenario">Aguarde...</p>
+
+                <div id="m1-opcoes">
+                    <button id="btn-opcao-0" class="btn-bloco terra" onclick="responderMissao1(0)">Opção 1</button>
+                    <button id="btn-opcao-1" class="btn-bloco terra" onclick="responderMissao1(1)">Opção 2</button>
+                </div>
+
+                <div id="m1-feedback" class="feedback-box oculto">
+                    <p id="m1-resultado-moedas" class="destaque-moedas"></p>
+                    <p id="m1-texto-feedback"></p>
+                    <button class="btn-bloco grama" onclick="voltarParaHub()">Voltar ao Mapa</button>
+                </div>
+            </section>
+
+            <button class="btn-link" onclick="voltarParaHub()">⬅ Voltar ao Mapa</button>
+        </div>
+
     </main>
-    <script src="script.js"></script>
 </body>
 </html>
